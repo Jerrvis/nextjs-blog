@@ -1,3 +1,11 @@
+/*
+ * @Author: Jerrvis Jerrvis@outlook.com
+ * @Date: 2023-03-05 15:01:54
+ * @LastEditors: Jerrvis Jerrvis@outlook.com
+ * @LastEditTime: 2023-03-05 15:43:34
+ * @FilePath: \nextjs-blog\pages\index.tsx
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
@@ -34,5 +42,6 @@ export async function getStaticProps() {
     props: {
       list: list,
     },
+    revalidate: 43200,
   };
 }

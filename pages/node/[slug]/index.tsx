@@ -71,4 +71,3 @@ export async function getStaticProps({ params }: { params: any }) {
   const article = await getContentBySlug("node", params.slug);
   return { props: { article } };
 }
-

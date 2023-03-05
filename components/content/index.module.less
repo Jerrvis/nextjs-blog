@@ -1,0 +1,57 @@
+.conatiner {
+  max-width: var(--maxWidth);
+  margin: 0 auto;
+  display: flex;
+}
+
+.aside {
+  width: 20rem;
+  margin: 0 1rem;
+}
+
+.part1 {
+  height: 40rem;
+  width: 100%;
+  background-color: var(--background);
+  border-radius: var(--card-radius);
+  position: sticky;
+  top: 4rem;
+  box-shadow: var(--box-shadow);
+}
+
+.author_state {
+  height: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px 0;
+
+  h5 {
+    font-size: 24px;
+
+  }
+
+
+  h6 {
+    font-size: 16px;
+  }
+}
+
+.author_image {
+  border-radius: 50%;
+}
+
+.route {
+  width: 100%;
+  // background-color: var(--background);
+  border-radius: var(--card-radius);
+  margin: 0 1rem;
+
+}
+
+@media (max-width: 900px) {
+  .aside {
+    display: none;
+  }
+}

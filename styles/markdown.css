@@ -1,0 +1,40 @@
+.markdown {
+  color: var(--text);
+  padding: 1rem 2rem;
+}
+.markdown h1 {
+  margin: 1.5rem 0 1.5rem 0;
+}
+.markdown h2 {
+  margin: 1.25rem 0 1.25rem 0.25rem;
+}
+.markdown h3 {
+  margin: 1rem 0 1rem 0.5rem;
+}
+.markdown h4 {
+  margin: 0.75rem 0 0.75rem 0.75rem;
+}
+.markdown h5 {
+  margin: 0.5rem 0 0.5rem 1rem;
+}
+.markdown li {
+  margin-left: 2rem;
+}
+.markdown ul,
+.markdown ol {
+  margin-left: 2rem;
+}
+.markdown strong {
+  font-size: 1.25rem;
+  font-weight: 900;
+}
+.markdown pre {
+  background-color: var(--support);
+}
+.markdown a {
+  color: var(--primary);
+  font-weight: 600;
+}
+.markdown p {
+  margin: 1rem;
+}

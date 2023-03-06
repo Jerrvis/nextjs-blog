@@ -1,7 +1,9 @@
 .conatiner {
   max-width: var(--maxWidth);
+  width: 100%;
   margin: 0 auto;
   display: flex;
+  padding: 0 1rem;
 }
 .aside {
   width: 20rem;
@@ -36,7 +38,6 @@
 .route {
   width: 100%;
   border-radius: var(--card-radius);
-  margin: 0 1rem;
 }
 @media (max-width: 900px) {
   .aside {

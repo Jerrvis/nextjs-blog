@@ -1,38 +1,47 @@
-import { getContentBySlug, getNodeSlugList } from "@/api";
-import { MDXRemote } from "next-mdx-remote";
-import Head from "next/head";
-import { useEffect } from "react";
-import styles from "./index.module.css";
+import { getContentBySlug, getNodeSlugList } from '@/api'
+import { MDXRemote } from 'next-mdx-remote'
+import Head from 'next/head'
+import { useEffect } from 'react'
+import styles from './index.module.css'
 
 interface Props {
-  article: any;
+  article: any
 }
 
 export default ({ article }: Props) => {
   useEffect(() => {
-    const lazyImages = document.querySelectorAll("img[data-src]");
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
+    const lazyImages = document.querySelectorAll('img[data-src]')
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
           // 进入可视区域，加载图片
-          const img: any = entry.target;
+          const img: any = entry.target
           // if (img.dataset.src) {
-          img.src = img.dataset.src;
+          img.src = img.dataset.src
 
-          img.removeAttribute("data-src");
-          observer.unobserve(img);
+          img.removeAttribute('data-src')
+          observer.unobserve(img)
         }
-      });
-    });
-    lazyImages.forEach((img) => observer.observe(img));
-  }, []);
+      })
+    })
+    lazyImages.forEach(img => observer.observe(img))
+  }, [])
   return (
     <>
       <Head>
         <title>{article.title}-i21y</title>
-        <meta name="description" content={article.description} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/i21y.ico" />
+        <meta
+          name="description"
+          content={article.description}
+        />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1"
+        />
+        <link
+          rel="icon"
+          href="/i21y.ico"
+        />
       </Head>
       <main>
         <article className={styles.article}>
@@ -44,30 +53,34 @@ export default ({ article }: Props) => {
             <MDXRemote
               {...article.content}
               components={{
-                img: (props) => (
-                  <img data-src={props.src} src="#" alt={props.alt} />
-                ),
+                img: props => (
+                  <img
+                    data-src={props.src}
+                    src="#"
+                    alt={props.alt}
+                  />
+                )
               }}
             ></MDXRemote>
           </div>
         </article>
       </main>
     </>
-  );
-};
+  )
+}
 
 // 获取node类的文章列表 生成对应路由
 export async function getStaticPaths(a: any) {
-  const list = getNodeSlugList();
+  const list = getNodeSlugList()
   return {
-    paths: list.map((item) => ({
-      params: { slug: item },
+    paths: list.map(item => ({
+      params: { slug: item }
     })),
-    fallback: "blocking",
-  };
+    fallback: 'blocking'
+  }
 }
 
 export async function getStaticProps({ params }: { params: any }) {
-  const article = await getContentBySlug("node", params.slug);
-  return { props: { article } };
+  const article = await getContentBySlug('node', params.slug)
+  return { props: { article }, revalidate: 14400 }
 }

@@ -1,8 +1,8 @@
 import Article from 'components/article'
-import { getContentList } from '@/api'
+import { Content, getContentList } from '@/api'
 import Head from 'next/head'
 
-export default function index({ list }: { list: any }) {
+export default function index({ list }: { list: Content[] }) {
   return (
     <>
       <Head>
@@ -21,7 +21,7 @@ export default function index({ list }: { list: any }) {
         />
       </Head>
       <main>
-        {list.map((item: any) => (
+        {list.map((item: Content) => (
           <Article data={item}></Article>
         ))}
       </main>

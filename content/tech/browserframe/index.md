@@ -9,7 +9,11 @@ tags:
 
 
 
+## 浏览器帧
 
+一般的浏览器刷新率跟屏幕差不多60hz，平均下来是16.6ms(1000s / 60hz) 一帧。
+
+在这期间浏览器主要会去完成回调函数与页面渲染这两个工作。
 
 ![brower_frame](https://aerotwist.com/static/blog/the-anatomy-of-a-frame/anatomy-of-a-frame.svg)
 

@@ -1,11 +1,11 @@
-import { getContentBySlug, getTechSlugList } from '@/api'
+import { Content, getContentBySlug, getTechSlugList } from '@/api'
 import { MDXRemote } from 'next-mdx-remote'
 import Head from 'next/head'
 import { useEffect } from 'react'
-import styles from './index.module.css'
+import styles from './index.module.less'
 
 interface Props {
-  article: any
+  article: Content
 }
 
 export default ({ article }: Props) => {
@@ -70,7 +70,7 @@ export default ({ article }: Props) => {
 }
 
 // 获取node类的文章列表 生成对应路由
-export async function getStaticPaths(a: any) {
+export async function getStaticPaths() {
   const list = getTechSlugList()
   return {
     paths: list.map(item => ({

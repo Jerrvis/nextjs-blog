@@ -1,7 +1,8 @@
-import styles from "./index.module.css";
+import { Content } from '@/api'
+import styles from './index.module.less'
 
 interface Props {
-  data: any;
+  data: Content
 }
 export default function index({ data }: Props) {
   return (
@@ -15,5 +16,5 @@ export default function index({ data }: Props) {
       <div className={styles.post_content}>{data.description}</div>
       <div></div>
     </article>
-  );
+  )
 }

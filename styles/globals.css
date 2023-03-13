@@ -19,6 +19,17 @@
   --bg-image: url(https://thumbsnap.com/i/5n2iBrbK.jpg);
 }
 
+
+.icon-style {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.icon-style path,
+.icon-style circle {
+  stroke: var(--text);
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --primary: #9da5b5;

@@ -1,4 +1,4 @@
-import styles from "./index.module.css";
+import styles from './index.module.less'
 
 export default function Banner() {
   return (
@@ -7,5 +7,5 @@ export default function Banner() {
         <h1>i21y</h1>
       </div>
     </section>
-  );
+  )
 }

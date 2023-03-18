@@ -25,27 +25,22 @@
   width: 1.5rem;
 }
 
-.icon-style path,
-.icon-style circle {
-  stroke: var(--text);
+
+.dark-mode {
+  --primary: #9da5b5;
+  --primary-active: #8b94a7;
+  --primary-alpha: #9da5b5aa;
+  --background: #191919;
+  --text: #ffffff;
+  --support: #5fb7f5;
+  --button: #9da5b5;
+  --error: #f55f5f;
+  --warn: #ffc107;
+  --success: #34c759;
+  --bg-image: url(https://thumbsnap.com/i/y12NZfQy.jpg);
+
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --primary: #9da5b5;
-    --primary-active: #8b94a7;
-    --primary-alpha: #9da5b5aa;
-    --background: #191919;
-    --text: #ffffff;
-    --support: #5fb7f5;
-    --button: #9da5b5;
-    --error: #f55f5f;
-    --warn: #ffc107;
-    --success: #34c759;
-    --bg-image: url(https://thumbsnap.com/i/y12NZfQy.jpg);
-
-  }
-}
 
 * {
   box-sizing: border-box;

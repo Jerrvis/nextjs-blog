@@ -1,15 +1,15 @@
-import styles from "./index.module.css";
-import { ReactNode, useEffect } from "react";
-import Image from "next/image";
+import styles from './index.module.less'
+import { ReactNode, useEffect } from 'react'
+import Image from 'next/image'
 
 interface props {
-  children: ReactNode;
+  children: ReactNode
 }
 
-const author_image = require("../../public/blackmagicgirl-e.png");
+const author_image = require('../../public/blackmagicgirl-e.png')
 
 export default function index({ children }: props) {
-  useEffect(() => {});
+  useEffect(() => {})
   return (
     <div>
       <div className={styles.conatiner}>
@@ -33,5 +33,5 @@ export default function index({ children }: props) {
         </aside>
       </div>
     </div>
-  );
+  )
 }

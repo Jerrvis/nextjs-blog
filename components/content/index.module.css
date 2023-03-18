@@ -4,6 +4,7 @@
   margin: 0 auto;
   display: flex;
   padding: 0 1rem;
+  color: var(--text);
 }
 .aside {
   width: 20rem;

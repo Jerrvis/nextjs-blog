@@ -1,10 +1,7 @@
 import Head from 'next/head'
-import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import Article from 'components/article'
 import { getAllList } from '@/api'
-
-const inter = Inter({ subsets: ['latin'] })
 
 interface Prop {
   list: any

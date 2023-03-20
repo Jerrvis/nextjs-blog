@@ -1,6 +1,6 @@
 ---
 title: 浏览器每一帧都会做些什么(事件循环)
-date: 2023-3-6 19:53:09
+date: 2023-3-20 14:50:43
 description: 浏览器的事件循环机制
 tags:
   - interview
@@ -45,6 +45,8 @@ Frame Start 阶段是浏览器渲染引擎在每一帧开始时执行的第一�
 2. 更新文档树和样式信息：JavaScript 代码可能会修改**文档树**或**样式信息**，从而触发后续的布局和绘制操作。
 3. 响应用户操作：JavaScript 代码可能会执行一些操作，如发送网络请求、更新本地存储等。
 
+这个阶段也是js的事件循环的一部分，js会按照事件循环，完成一个宏任务，及该宏任务里的同步队列中所有的微任务。
+
 由于 Input Event Handlers 阶段的执行时间可能会很长，可能会对性能和响应速度产生影响。因此，编写高效的 JavaScript 代码以减少执行时间，避免阻塞其他阶段的执行，是很重要的。
 
 
@@ -59,6 +61,90 @@ Frame Start 阶段是浏览器渲染引擎在每一帧开始时执行的第一�
 2. 更新动画状态：动画帧回调函数通常会修改元素的位置、大小、透明度等属性，从而触发后续的布局和绘制操作。
 
 由于 RAF 阶段的执行时间通常很短，因此它不太可能对性能和响应速度产生显著影响。然而，由于 `requestAnimationFrame()` 方法在每一帧都会执行动画帧回调函数，因此如果动画帧回调函数执行的任务过于繁重，可能会导致帧率下降，从而影响动画的流畅度。
+
+
+
+如下为一段代码，点击按钮，浏览器执行如下。
+
+``` html
+<body>
+  <button id="test">按钮</button>
+  <script>
+      let btn = document.getElementById('test')
+
+      let frameCount = 0
+
+      btn.addEventListener('click', () => {
+        console.log('任务开始')
+
+        setTimeout(() => {
+          console.log('宏任务 5')
+          Promise.resolve().then(() => console.log('微任务 7'))
+          console.log('同步任务 6')
+            
+          requestAnimationFrame(() => {
+            console.log('帧结束 ' + frameCount)
+            frameCount += 1
+          })
+        })
+
+        let a = new Promise((resolve, reject) => {
+          console.log('同步任务 1')
+          resolve()
+        })
+          .then(() => {
+            console.log('微任务 3')
+          })
+          .then(() => {
+            console.log('微任务 4')
+          })
+
+        console.log('同步任务 2')
+
+        requestAnimationFrame(() => {
+          console.log('帧结束 ' + frameCount)
+          frameCount += 1
+        })
+      })
+/*
+任务开始
+  同步任务 1
+  同步任务 2
+	微任务 3
+	微任务 4
+帧结束 0
+  宏任务 5
+	微任务 6
+帧结束 1
+*/
+  </script>
+</body>
+
+
+```
+
+1. 浏览器会将整个按钮的回调函数作为一个宏任务执行
+2. 执行同步代码打印(`任务开始`)
+3. 遇到``setTimeout`，将`setTimeout`任务回调压入宏任务队列
+4. 执行 new Promise 的同步任务，打印(`同步任务 1`)
+5. `promise.then` 压入微任务队列
+6. `promise.then` 再次压入微任务队列，此时微任务队列有两个任务
+7. 执行同步代码打印(`同步任务 2`)
+8. `requestAnimationFrame` 挂载一个回调函数
+9. 此时同步任务执行完毕，开始执行**微任务队列**
+10. `promise.then` 打印(`微任务 3`)
+11. `promise.then` 打印(`微任务 4`)
+12. 完成所有微任务后 执行 `requestAnimationFrame` 回调
+13. 打印  `帧结束 0` (表示该帧的事件循环结束)
+14. 略过第0帧的渲染、`requestIdleCallback` 等直接进入到下一帧
+15. 执行`setTimeout`回调打印(`宏任务 5`)
+16. 同步执行`promise.resolve()` 将 then 压入微任务队列
+17. 执行同步任务 打印(`同步 6`)
+18. 挂载 `requestAnimationFrame`回调
+19. 执行这一帧的微任务，打印(`微任务 7`)
+20. 执行 `requestAnimationFrame`回调，打印(`帧结束 1`)
+
+其中 1-14 是第1帧发生的，15-20是下一帧才会有的。也就是说每一帧的事件循环只会执行一个宏任务和它所包括的所有微任务。
 
 
 
